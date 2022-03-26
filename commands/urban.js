@@ -14,8 +14,9 @@ module.exports = {
           ),
      execute(interaction){
           const word = interaction.options.getString('word').toLowerCase()
+          
           const words = word.split(' ')
-          console.log(words)
+          
           ud.define(word, (err, results) => {
                if(err){
                    return interaction.reply('Word unavailable')
@@ -23,13 +24,13 @@ module.exports = {
                }
 
                const syllableRegex = /[^aeiouy]*[aeiouy]+(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy]))?/gi
-               const wordHeader = words.map(word => word.match(syllableRegex)).map(word => word.join('.')).join('.')
-               console.log(word)
+               const wordHeader = words.map(word => word.match(syllableRegex)).map(word => word.join('.')).join('-')
+          
 
                const embed = new MessageEmbed()
                     .setTitle(word)
-                    .setURL(`https://www.urbandictionary.com/define.php?term=${args.join('%20')}`)
-                    .setDescription(`https://www.urbandictionary.com/define.php?term=${args.join('%20')}`)
+                    .setURL(`https://www.urbandictionary.com/define.php?term=${words.join('%20')}`)
+                    .setDescription(`https://www.urbandictionary.com/define.php?term=${words.join('%20')}`)
                     .setFooter({text: 'Powered by Urban Dictionary'})
                     .setColor('WHITE')
                results.forEach(def => {
@@ -50,7 +51,7 @@ module.exports = {
                    
                }
                const syllableRegex = /[^aeiouy]*[aeiouy]+(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy]))?/gi
-               const wordHeader = args.map(word => word.match(syllableRegex)).map(word => word.join('.')).join('.')
+               const wordHeader = args.map(word => word.match(syllableRegex)).map(word => word.join('.')).join('-')
 
                const embed = new MessageEmbed()
                     .setTitle(word)
